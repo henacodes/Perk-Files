@@ -1,9 +1,13 @@
-import { supabase, uploadToSupabase } from '$lib/server/supabase';
+import { uploadToSupabase } from '$lib/server/supabase';
 import { auth } from '$lib/auth';
-import { prisma } from '$lib/server/prisma';
 import type { RequestEvent } from './$types';
 import { generateRandomString } from 'better-auth/crypto';
 import { getFileExtension } from '$lib/utils/file';
+import { FileUploadError } from '$lib/exceptions/FileUploadException';
+
+import { json } from '@sveltejs/kit';
+import { createFile } from '$lib/db/files';
+
 export const GET = async ({ request }: any) => {
 	const session = await auth.api.getSession({
 		headers: request.headers
@@ -13,6 +17,14 @@ export const GET = async ({ request }: any) => {
 };
 
 export const POST = async ({ request }: RequestEvent) => {
+	const session = await auth.api.getSession({
+		headers: request.headers
+	});
+
+	if (!session?.user) {
+		return json({ error: { message: 'You are not logged-in' } });
+	}
+
 	const formData = await request.formData();
 
 	const title = formData.get('title') as string;
@@ -25,12 +37,29 @@ export const POST = async ({ request }: RequestEvent) => {
 		const data = await uploadToSupabase(
 			file,
 			'perks',
-			`${title}_${generateRandomString(5)}.${getFileExtension(file)}`
+			`${title.replace(' ', '')}_${generateRandomString(5)}.${getFileExtension(file)}`
 		);
 
-		console.log(data);
-	} catch (error) {
-		console.log(error);
+		let filePath = data.path;
+
+		try {
+			const newFile = await createFile(
+				title,
+				description,
+				price,
+				session.user.id,
+				categoryId,
+				filePath,
+				file.size
+			);
+
+			return json(newFile);
+		} catch (error) {
+			console.log(error);
+			return json({ error: { message: "Could't create a new file record." } });
+		}
+	} catch (error: unknown) {
+		return json({ error: { message: 'Failed to upload file' } });
 	}
 	console.log(title, file);
 	return new Response();

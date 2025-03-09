@@ -96,18 +96,13 @@ model DigitalFile {
   price       Decimal
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
-  user        User          @relation(fields: [userId], references: [id])
-  userId      String
-  category    Category      @relation(fields: [categoryId], references: [id])
-  categoryId  String
+  author      User          @relation(fields: [authorId], references: [id])
+  authorId    String
+  fileSize        Int?
+  category    String     
   transactions Transaction[] @relation("TransactionDigitalFiles")
 
   @@map("digital_file")
 }
 
 
-model Category {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  digitalFiles DigitalFile[]
-}

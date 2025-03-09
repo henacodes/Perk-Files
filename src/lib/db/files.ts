@@ -8,16 +8,18 @@ export const createFile = async (
 	price: number,
 	userId: string,
 	category: string,
-	filePath: string
+	filePath: string,
+	fileSize: number
 ) => {
 	const newFile = await prisma.digitalFile.create({
 		data: {
 			title,
 			description,
 			price,
-			userId,
-			categoryId: category,
-			fileUrl: filePath
+			authorId: userId,
+			category,
+			fileUrl: filePath,
+			fileSize
 		}
 	});
 
