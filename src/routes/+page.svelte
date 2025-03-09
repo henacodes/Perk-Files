@@ -13,7 +13,7 @@
 		<button
 			class=" browse border-primary flex cursor-pointer items-center border p-2 px-7 transition ease-linear hover:shadow-[4px_4px_#5e503f]"
 		>
-			<span class=" mx-2">Browse</span>
+			<span class=" mx-2">Browsee</span>
 			<ArrowRight size={20} />
 		</button>
 	</div>

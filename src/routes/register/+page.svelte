@@ -1,7 +1,23 @@
 <script lang="ts">
 	import { authClient } from '$lib/auth-client';
+	const formData = {
+		email: 'test@gmail.com',
+		password: '12345678',
+		firstName: 'Henok',
+		lastName: 'Ayenew',
+		image: null
+	};
 
-	const formData = { email: '', password: '', firstName: '', lastName: '', image: null };
+	const register = async () => {
+		const { email, password, firstName, lastName } = formData;
+		const { data, error } = await authClient.signUp.email({
+			email,
+			password,
+			name: `${firstName} ${lastName}`
+		});
+
+		console.log(data, error);
+	};
 </script>
 
 <div class="  p-6">
@@ -47,7 +63,7 @@
 		</div>
 
 		<button
-			onclick={() => console.log(formData)}
+			onclick={register}
 			class=" border border-primary p-2 hover:shadow-[4px_4px_#5e503f] transition ease-in-out"
 			>Register
 		</button>
