@@ -4,6 +4,7 @@
 @source "../node_modules/@uploadthing/svelte/dist"; /** <-- depends on your project structure */
 @theme {
 	--color-primary: #5e503f;
+	--color-secondary: #f3f3f3;
 }
 
 button {
