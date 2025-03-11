@@ -16,21 +16,28 @@
 	});
 </script>
 
-<img src="/bubble.png" class=" relative z-0 mb-[-80%] w-full" alt="" />
-<div class=" relative z-30 pt-4">
-	<p class=" text-primary px-6 text-3xl font-bold">PerkFiles.</p>
-	<p class=" m-15 text-center text-5xl font-bold">Earn what you deserve</p>
-
-	<div class=" flex justify-center p-4">
-		<button
-			class=" browse border-primary flex cursor-pointer items-center border p-2 px-7 transition ease-linear hover:shadow-[4px_4px_#5e503f]"
+<div class=" relative z-30 bg-primary/10">
+	<div class="  w-full p-3 flex justify-start">
+		<p
+			class=" text-primary px-3 text-3xl font-bold border border-primary p-2 shadow-[2px_2px_#5e503f] rounded bg-secondary"
 		>
-			<span class=" mx-2">Browse</span>
-			<ArrowRight size={20} />
-		</button>
+			P.
+		</p>
+	</div>
+	<div class="bg-primary p-10">
+		<p class="  text-center text-5xl font-bold text-secondary">Earn what you deserve</p>
+
+		<div class=" flex justify-center pb-10 pt-5">
+			<button
+				class=" browse border-secondary text-secondary flex cursor-pointer items-center border-2 rounded-md p-2 px-7 transition ease-linear hover:shadow-[3px_3px_#f3f3f3] hover:scale-105"
+			>
+				<span class=" mx-2">Browse</span>
+				<ArrowRight size={20} />
+			</button>
+		</div>
 	</div>
 
-	<div class=" bg-primary/10 p-6">
+	<div class=" bg-primary/10 p-6 border-t-2 border-primary">
 		<p class=" text-2xl font-semibold">Popular Gems</p>
 
 		{#each data.files as file}
