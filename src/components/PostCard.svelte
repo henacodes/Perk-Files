@@ -3,8 +3,6 @@
 	import { ShoppingCart, Plus, FileType, HardDrive } from 'lucide-svelte';
 
 	let { file } = $props();
-
-	$inspect(file);
 </script>
 
 <div

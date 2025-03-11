@@ -36,7 +36,10 @@ export const getTransactionStatus = async (txRef: string) => {
 export const completeTransaction = async (txRef: string) => {
 	const updated = await prisma.transaction.update({
 		where: { txRef },
-		data: { status: 'done' }
+		data: { status: 'done' },
+		include: {
+			digitalFiles: true
+		}
 	});
 	return updated;
 };

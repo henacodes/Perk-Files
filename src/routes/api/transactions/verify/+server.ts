@@ -30,13 +30,13 @@ export const GET: RequestHandler = async ({ request, url }) => {
 
 			await completeTransaction(txRef);
 
-			return json('Transaction completed successfully!');
+			return json({ message: 'Transaction completed successfully!', status: 'success' });
 		} else {
+			console.log('erorororor', result);
 			return json(returnError('Transaction is not done yet!'));
 		}
 	} catch (error) {
+		console.log(error);
 		return json(returnError("Couldn't verify your transaction"));
 	}
-
-	return json({});
 };

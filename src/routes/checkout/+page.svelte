@@ -4,10 +4,7 @@
 
 	import FileView from '../../components/FileView.svelte';
 	import { Barcode } from 'lucide-svelte';
-	import { authClient } from '$lib/auth-client';
 	import { generateRandomString } from 'better-auth/crypto';
-	import { derived } from 'svelte/store';
-	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 
@@ -31,15 +28,16 @@
 
 	async function checkout() {
 		let name = user.name.split(' ');
+		let txRef = generateRandomString(10);
 		let payload = {
 			amount: calculateTotalPrice(cart),
 			currency: 'ETB',
 			email: user.email,
 			first_name: name[0],
-			tx_ref: generateRandomString(10),
+			tx_ref: txRef,
 			last_name: name[1],
 			callback_url: 'http://localhost:5173/api/chapa/callback',
-			return_url: 'http://localhost:5173/',
+			return_url: `http://localhost:5173/verify?tx_ref=${txRef}`,
 			digital_files: cart.map((f) => f.id)
 		};
 
