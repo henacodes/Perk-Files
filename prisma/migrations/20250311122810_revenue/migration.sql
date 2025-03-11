@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "user" ADD COLUMN     "currentBalance" DECIMAL(65,30) NOT NULL DEFAULT 0.0,
+ADD COLUMN     "totalRevenue" DECIMAL(65,30) NOT NULL DEFAULT 0.0;

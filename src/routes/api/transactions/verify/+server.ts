@@ -1,7 +1,8 @@
 import { env } from '$env/dynamic/private';
-import { completeTransaction, getTransactionStatus } from '$lib/db/transaction';
+import { auth } from '$lib/auth';
+import { completeTransaction, getTransactionStatus, payFileOwners } from '$lib/db/transaction';
 import { returnError } from '$lib/utils';
-import { json, type RequestHandler } from '@sveltejs/kit';
+import { json, redirect, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ request, url }) => {
 	const apiUrl = env.CHAPA_VERIFY_URL;
@@ -9,14 +10,21 @@ export const GET: RequestHandler = async ({ request, url }) => {
 
 	const txRef = url.searchParams.get('tx_ref');
 
+	const session = await auth.api.getSession({
+		headers: request.headers
+	});
+
+	if (!session) {
+		return redirect(301, '/login');
+	}
+
 	var myHeaders = new Headers();
 	myHeaders.append('Authorization', `Bearer ${apiKey}`);
 
 	try {
 		let response = await fetch(`${apiUrl}/${txRef}`, {
 			method: 'GET',
-			headers: myHeaders,
-			redirect: 'follow'
+			headers: myHeaders
 		});
 
 		let result = await response.json();
@@ -28,9 +36,21 @@ export const GET: RequestHandler = async ({ request, url }) => {
 				return json(returnError('Receipt already used.', { status: 'failed' }));
 			}
 
-			await completeTransaction(txRef);
+			try {
+				let transaction = await completeTransaction(txRef);
 
-			return json({ message: 'Transaction completed successfully!', status: 'success' });
+				let files = transaction.digitalFiles;
+
+				let promises = files.map(async (f: any) => {
+					await payFileOwners(f.authorId, parseFloat(f.price));
+				});
+
+				await Promise.all(promises);
+
+				return json({ message: 'Transaction completed successfully!', status: 'success' });
+			} catch (error: any) {
+				return json(returnError(error.message));
+			}
 		} else {
 			return json(returnError('Transaction is not done yet!'));
 		}

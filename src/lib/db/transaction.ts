@@ -67,3 +67,17 @@ export const userCanAccessFile = async (userId: string, fileId: string) => {
 
 	return transaction;
 };
+
+export const payFileOwners = async (userId: string, amount: number) => {
+	await prisma.user.update({
+		where: { id: userId },
+		data: {
+			totalRevenue: {
+				increment: amount
+			},
+			currentBalance: {
+				increment: amount
+			}
+		}
+	});
+};

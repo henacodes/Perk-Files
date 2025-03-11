@@ -21,8 +21,11 @@ model User {
   image         String?
   createdAt     DateTime
   updatedAt     DateTime
+  totalRevenue Decimal @default(0.0)
+  currentBalance Decimal @default(0.0)
   sessions      Session[]
   accounts      Account[]
+  
 
   digitalFiles DigitalFile[]
   transactions Transaction[]
