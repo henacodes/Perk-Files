@@ -30,3 +30,21 @@ export const fetchFiles = async () => {
 	const files = await prisma.digitalFile.findMany({ include: { author: true } });
 	return files;
 };
+
+// get files bought by a user
+export const fetchMyFiles = async (userId: string) => {
+	const transactions = await prisma.transaction.findMany({
+		where: { userId, status: 'done' },
+		include: {
+			digitalFiles: true
+		}
+	});
+
+	return transactions.map((tx) => tx.digitalFiles);
+};
+
+export const fetchFileById = async (fileId: string) => {
+	const file = await prisma.digitalFile.findFirst({ where: { id: fileId } });
+
+	return file;
+};

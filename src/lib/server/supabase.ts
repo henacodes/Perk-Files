@@ -13,3 +13,13 @@ export const uploadToSupabase = async (file: File, bucket: string, path: string)
 		throw new FileUploadError(`Couldn't upload the file: ${error.message}`);
 	}
 };
+
+export const downloadFile = async (path: string, bucket: string) => {
+	const { data, error } = await supabase.storage.from(bucket).download(path);
+	if (!error) {
+		return data;
+	} else {
+		console.log(error);
+		throw new Error("Could't download the file!");
+	}
+};

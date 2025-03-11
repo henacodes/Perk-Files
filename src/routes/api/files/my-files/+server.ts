@@ -1,0 +1,17 @@
+import { auth } from '$lib/auth';
+import { fetchMyFiles } from '$lib/db/files';
+import { json, redirect, type RequestHandler } from '@sveltejs/kit';
+
+export const GET: RequestHandler = async ({ request }) => {
+	const session = await auth.api.getSession({
+		headers: request.headers
+	});
+
+	if (!session) {
+		return redirect(301, '/');
+	}
+
+	const files = await fetchMyFiles(session.user.id);
+
+	return json(files[0]);
+};

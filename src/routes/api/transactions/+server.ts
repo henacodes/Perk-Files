@@ -48,6 +48,4 @@ export const POST: RequestHandler = async ({ request }) => {
 	} catch (error) {
 		return json({ error: { message: 'Checkout failed' } });
 	}
-
-	return json({});
 };

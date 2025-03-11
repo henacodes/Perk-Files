@@ -25,18 +25,17 @@ export const GET: RequestHandler = async ({ request, url }) => {
 			const txStatus = await getTransactionStatus(txRef);
 
 			if (txStatus === 'done') {
-				return json(returnError('Receipt already used.'));
+				return json(returnError('Receipt already used.', { status: 'failed' }));
 			}
 
 			await completeTransaction(txRef);
 
 			return json({ message: 'Transaction completed successfully!', status: 'success' });
 		} else {
-			console.log('erorororor', result);
 			return json(returnError('Transaction is not done yet!'));
 		}
-	} catch (error) {
+	} catch (error: any) {
 		console.log(error);
-		return json(returnError("Couldn't verify your transaction"));
+		return json(returnError(error.message));
 	}
 };

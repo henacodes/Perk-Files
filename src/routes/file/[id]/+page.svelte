@@ -17,20 +17,26 @@
 			quisquam similique amet dicta.
 		</p>
 
-		<div class=" my-9">
-			<p class=" text-primary mt-2 flex items-center font-bold">
+		<div class=" my-9 border border-primary">
+			<p
+				class=" text-primary border-b border-primary flex items-center hover:bg-primary/10 transition ease-in-out font-bold p-2"
+			>
 				<FileType class="text-primary/50 mx-2 " /> PNG
 			</p>
-			<p class=" text-primary mt-2 flex items-center font-bold">
+			<p
+				class=" text-primary border-b border-primary flex items-center hover:bg-primary/10 transition ease-in-out font-bold p-2"
+			>
 				<Banknote class="text-primary/50 mx-2 " /> ETB 3400
 			</p>
-			<p class=" text-primary mt-2 flex items-center font-bold">
+			<p
+				class=" text-primary flex items-center hover:bg-primary/10 transition ease-in-out font-bold p-2"
+			>
 				<MonitorDown class="text-primary/50 mx-2 " /> 5433 downloads
 			</p>
 		</div>
 
 		<button
-			class=" border-primary text-primary flex w-full justify-center border-2 p-3 font-semibold transition ease-in-out hover:shadow-[4px_4px_#5e503f]"
+			class=" border-primary text-primary flex w-full justify-center border-2 p-3 font-semibold transition ease-in-out hover:shadow-[4px_4px_#5e503f] rounded-md"
 		>
 			<ShoppingCart class=" mx-2 " /> Add to cart
 		</button>

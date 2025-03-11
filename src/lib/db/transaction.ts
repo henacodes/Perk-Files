@@ -51,3 +51,19 @@ export const deleteTransaction = async (id: string) => {
 		}
 	});
 };
+
+export const userCanAccessFile = async (userId: string, fileId: string) => {
+	const transaction = await prisma.transaction.findFirst({
+		where: {
+			digitalFiles: {
+				some: {
+					id: fileId
+				}
+			},
+			userId,
+			status: 'done'
+		}
+	});
+
+	return transaction;
+};

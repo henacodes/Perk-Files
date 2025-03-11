@@ -5,5 +5,7 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
 	const res = await fetch(`/api/transactions/verify?tx_ref=${txRef}`);
 	const result = await res.json();
 
-	console.log(result);
+	return {
+		...result
+	};
 };
