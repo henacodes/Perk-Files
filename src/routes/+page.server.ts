@@ -3,9 +3,9 @@ import { fetchFiles } from '$lib/db/files';
 function serializeFile(file: any) {
 	return {
 		...file,
-		price: file.price.toString(), // Convert Decimal to string
-		createdAt: file.createdAt.toISOString(), // Convert Date to string
-		id: file.id.toString() // Convert BigInt to string
+		price: file.price.toString(),
+		createdAt: file.createdAt.toISOString(),
+		id: file.id.toString()
 	};
 }
 

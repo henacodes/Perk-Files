@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap');
 @import 'tailwindcss';
 
 @import 'uploadthing/tw/v4';
 @source "../node_modules/@uploadthing/svelte/dist"; /** <-- depends on your project structure */
 @theme {
-	--color-primary: #5e503f;
+	/*--color-primary: #5e503f;*/
+	--color-primary: #ff8c00;
 	--color-secondary: #f3f3f3;
 }
 

@@ -6,7 +6,12 @@ export const load: LayoutServerLoad = async ({ request }) => {
 		headers: request.headers
 	});
 
-	let user = session?.user;
+	let user: any = session?.user;
+	console.log('userrrrrrrrrrrrrrrrrr', user);
+	/*if (user) {
+		user.totalRevenue = user.totalRevenue.toString();
+		user.currentBalance = user.currentBalance.toString();
+	}*/
 	return {
 		user
 	};

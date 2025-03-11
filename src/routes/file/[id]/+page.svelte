@@ -36,7 +36,7 @@
 		</div>
 
 		<button
-			class=" border-primary text-primary flex w-full justify-center border-2 p-3 font-semibold transition ease-in-out hover:shadow-[4px_4px_#5e503f] rounded-md"
+			class=" border-primary text-primary flex w-full justify-center border-2 p-3 font-semibold transition ease-in-out hover:shadow-[4px_4px_#000000] rounded-md"
 		>
 			<ShoppingCart class=" mx-2 " /> Add to cart
 		</button>
