@@ -2,6 +2,18 @@
 	import FileView from '../components/FileView.svelte';
 	import { ArrowRight } from 'lucide-svelte';
 	import PostCard from '../components/PostCard.svelte';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+
+	const { data } = $props();
+
+	onMount(() => {
+		if (browser) {
+			if (data.files) {
+				localStorage.setItem('file-cart', JSON.stringify(data.files));
+			}
+		}
+	});
 </script>
 
 <img src="/bubble.png" class=" relative z-0 mb-[-80%] w-full" alt="" />
@@ -21,10 +33,9 @@
 	<div class=" bg-primary/10 p-6">
 		<p class=" text-2xl font-semibold">Popular Gems</p>
 
-		<PostCard />
-		<PostCard />
-		<PostCard />
-		<PostCard />
+		{#each data.files as file}
+			<PostCard {file} />
+		{/each}
 	</div>
 </div>
 

@@ -76,33 +76,37 @@ model Verification {
 }
 
 
-
 model Transaction {
-  id          String   @id @default(uuid())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String
-  amount      Decimal
-  createdAt   DateTime @default(now())
-  digitalFiles DigitalFile[] @relation("TransactionDigitalFiles")
+  id          String       @id @default(uuid())
+  user        User         @relation(fields: [userId], references: [id]) 
+  userId      String 
+  amount      Decimal 
+  createdAt   DateTime     @default(now()) 
+  digitalFiles DigitalFile[] @relation("TransactionDigitalFiles") 
+  txRef      String  @unique
+  status      String 
 
-  @@map("transaction")
+  @@map("transaction") 
 }
 
-model DigitalFile {
-  id          String        @id @default(uuid())
-  title       String
-  description String
-  fileUrl     String
-  price       Decimal
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  author      User          @relation(fields: [authorId], references: [id])
-  authorId    String
-  fileSize        Int?
-  category    String     
-  transactions Transaction[] @relation("TransactionDigitalFiles")
 
-  @@map("digital_file")
+
+
+model DigitalFile {
+  id          String        @id @default(uuid()) 
+  title       String 
+  description String 
+  fileUrl     String 
+  price       Decimal 
+  createdAt   DateTime      @default(now()) 
+  updatedAt   DateTime      @updatedAt 
+  author      User          @relation(fields: [authorId], references: [id]) 
+  authorId    String 
+  fileSize    Int? 
+  category    String 
+  transactions Transaction[] @relation("TransactionDigitalFiles") 
+
+  @@map("digital_file") 
 }
 
 

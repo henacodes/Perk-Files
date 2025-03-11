@@ -25,3 +25,8 @@ export const createFile = async (
 
 	return newFile;
 };
+
+export const fetchFiles = async () => {
+	const files = await prisma.digitalFile.findMany({ include: { author: true } });
+	return files;
+};

@@ -3,7 +3,7 @@
 </script>
 
 <div class=" pb-6">
-	<img src="/art.jpg" alt="" class="art mb-[-20%]" />
+	<img src="/art.png" alt="" class="art w-full mb-[-20%]" />
 	<div class="px-7">
 		<p class=" text-primary text-5xl font-bold">The country yard of the old residency in munich</p>
 		<div class="  my-3 flex items-center">
@@ -18,13 +18,13 @@
 		</p>
 
 		<div class=" my-9">
-			<p class=" text-primary mt-2 flex items-center">
+			<p class=" text-primary mt-2 flex items-center font-bold">
 				<FileType class="text-primary/50 mx-2 " /> PNG
 			</p>
-			<p class=" text-primary mt-2 flex items-center">
+			<p class=" text-primary mt-2 flex items-center font-bold">
 				<Banknote class="text-primary/50 mx-2 " /> ETB 3400
 			</p>
-			<p class=" text-primary mt-2 flex items-center">
+			<p class=" text-primary mt-2 flex items-center font-bold">
 				<MonitorDown class="text-primary/50 mx-2 " /> 5433 downloads
 			</p>
 		</div>

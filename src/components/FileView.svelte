@@ -14,7 +14,6 @@
 		<small>{file.size}MB</small>
 	</div>
 	<p class=" mx-3 flex-[0.7]">{file.name}</p>
-
 	<div class=" flex-[0.2] items-center">
 		<p><span class="font-semibold">ETB</span> {file.price}</p>
 		<small>{file.format}</small>

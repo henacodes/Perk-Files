@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { trimParag } from '$lib/utils';
 	import { ShoppingCart, Plus, FileType, HardDrive } from 'lucide-svelte';
+
+	let { file } = $props();
+
+	$inspect(file);
 </script>
 
 <div
@@ -12,15 +16,10 @@
 	<div class=" flex-1/2 px-4 pt-4">
 		<div class="  flex items-center">
 			<img src="/avatar.png" class=" mr-1 max-w-7 rounded-full" alt="" />
-			<p>Henok Ayenew</p>
+			<p>{file.author.name}</p>
 		</div>
 		<p class=" text-primary text-lg font-bold">
-			{trimParag(
-				`Lorem ipsum dolor, sit amet consecte adipis elit. Fugit ratione error, minus hic nam
-			corrupti inventore laboriosam nobis quia esse sed quasi officia quae quos pariatur, omnis
-			veritatis ipsam eligendi.`,
-				55
-			)}
+			{trimParag(file.title, 55)}
 		</p>
 
 		<div class="mt-11">
