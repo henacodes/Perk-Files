@@ -1,13 +1,17 @@
 <script>
 	import { Terminal } from 'lucide-svelte';
 	import { onMount } from 'svelte';
+	import { getAlert } from '$state/uiState.svelte';
 
 	let translateValue = $state('-150%');
 	onMount(() => {
 		setTimeout(() => {
 			translateValue = '0%';
-		}, 500);
+		}, 300);
 	});
+
+	let title = getAlert()?.title;
+	let message = getAlert()?.message;
 </script>
 
 <div class=" fixed w-full h-[100vh] bg-black/50 top-0 left-0 z-50 px-6">
@@ -18,10 +22,10 @@
 	>
 		<div class="flex items-center">
 			<Terminal />
-			<h5 class="mb-1 leading-none tracking-tight font-bold">Default Alert</h5>
+			<h5 class="mb-1 leading-none tracking-tight font-bold">{title}</h5>
 		</div>
 		<div class="text-sm font-base">
-			You can add components and dependencies to your app using the cli.
+			{message}
 		</div>
 	</div>
 </div>

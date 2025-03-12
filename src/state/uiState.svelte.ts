@@ -1,7 +1,15 @@
-let alert: string | null = $state(null);
+interface Alert {
+	title: string;
+	message: string;
+}
 
-export function changeAlert(message: string | null) {
-	alert = message;
+let alert: Alert | null = $state(null);
+
+export function notify(title: string, message: string) {
+	alert = { title, message };
+	setTimeout(() => {
+		alert = null;
+	}, 3000);
 }
 
 export function getAlert() {

@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import Alert from '../components/Alert.svelte';
+	import { notify } from '../state/uiState.svelte';
 
 	const { data } = $props();
 
@@ -30,6 +31,7 @@
 
 		<div class=" flex justify-center pb-10 pt-5">
 			<button
+				onclick={() => notify('Error occured', 'We got a problem here')}
 				class=" browse border-black text-black flex cursor-pointer items-center border-2 rounded-md p-2 px-7 transition ease-linear hover:shadow-[3px_3px_#000000] hover:scale-105"
 			>
 				<span class=" mx-2">Browse</span>
