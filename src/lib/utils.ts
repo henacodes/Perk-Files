@@ -5,3 +5,12 @@ export function trimParag(paragraph: string, length: number) {
 export function returnError(message: string, otherFields?: Object) {
 	return { message, ...otherFields };
 }
+
+export function serializeFile(file: any) {
+	return {
+		...file,
+		price: file.price.toString(),
+		createdAt: file.createdAt.toISOString(),
+		id: file.id.toString()
+	};
+}
