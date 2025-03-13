@@ -20,11 +20,11 @@
 	};
 </script>
 
-<div class="  p-6">
+<div class="  p-6 w-full flex flex-col items-center">
 	<p class="text-2xl font-bold text-center">Sign Up</p>
 	<form
 		action=""
-		class="flex flex-col w-full bg-primary p-4 rounded-md border border-black shadow-[2px_2px_#000000] mt-5"
+		class="flex flex-col w-full bg-primary p-4 rounded-md border border-black shadow-[2px_2px_#000000] mt-5 sm:w-[55vw] md:w-2/3 lg:w-1/2 xl:w-[25vw]"
 	>
 		<input
 			type="email"
@@ -59,7 +59,7 @@
 				type="file"
 				name="profile"
 				placeholder="Profile Pic"
-				class="border border-black rounded-md hover:bg-secondary transition ease-in-out focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none cursor-pointer mb-6"
+				class="border border-black rounded-md hover:bg-secondary transition ease-in-out focus-visible:shadow-[1px_1px_#000000] my-3 py-3 px-1 focus-visible:outline-none cursor-pointer mb-6"
 				id=""
 				bind:files={formData.image}
 			/>
@@ -73,4 +73,11 @@
 			</button>
 		</div>
 	</form>
+	<p class="mt-4">
+		Already have an account? <a
+			href="/login"
+			class="   bg-primary transition ease-in-out p-1 rounded px-2 shadow-[2px_2px_#000000] border border-black scale-105 hover:scale-100 hover:shadow-none"
+			>Sign In</a
+		>
+	</p>
 </div>

@@ -5,7 +5,7 @@ interface Alert {
 
 let alert: Alert | null = $state(null);
 
-export function notify(title: string, message: string) {
+export function notify(title: string, message: string = '') {
 	alert = { title, message };
 	setTimeout(() => {
 		alert = null;

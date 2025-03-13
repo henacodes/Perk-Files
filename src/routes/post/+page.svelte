@@ -74,7 +74,7 @@
 			type="file"
 			accept="image/jpeg, image/png"
 			on:change={handleFileChange}
-			class="w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none cursor-pointer"
 		/>
 		{#if errors.file}
 			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">{errors.file}</p>
