@@ -58,16 +58,18 @@
 	}
 </script>
 
-<div class=" p-4">
+<div class=" p-4 bg-secondary dark:bg-secondary-dark h-[90vh]">
 	{#each cart as file}
 		<FileView />
 	{/each}
 
-	<p class=" my-2">Subtotal: {calculateTotalPrice(cart)}</p>
+	<p class=" my-2 dark:text-secondary">
+		Subtotal: <span class=" font-bold">ETB {calculateTotalPrice(cart)}</span>
+	</p>
 
 	<button
 		onclick={checkout}
-		class=" w-full bg-primary text-secondary flex items-center justify-center p-2"
+		class=" w-full bg-primary flex items-center justify-center p-2 rounded-sm transition ease-in-out text-black shadow-[3px_3px_#000000] hover:translate-[3px] hover:shadow-none border-[2px] border-black"
 	>
 		<Barcode /> <span class="mx-2">Checkout</span></button
 	>

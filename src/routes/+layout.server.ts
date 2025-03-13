@@ -8,10 +8,7 @@ export const load: LayoutServerLoad = async ({ request }) => {
 
 	let user: any = session?.user;
 	console.log('userrrrrrrrrrrrrrrrrr', user);
-	/*if (user) {
-		user.totalRevenue = user.totalRevenue.toString();
-		user.currentBalance = user.currentBalance.toString();
-	}*/
+
 	return {
 		user
 	};

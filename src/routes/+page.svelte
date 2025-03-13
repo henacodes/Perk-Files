@@ -19,8 +19,8 @@
 	});
 </script>
 
-<div class=" relative z-30 bg-primary/10 dark:bg-secondary-dark">
-	<div class="bg-primary dark:bg-secondary-dark p-10 border-b-2 border-black">
+<div class=" relative z-30 bg-primary/10">
+	<div class=" p-10 border-b-2 border-black">
 		<p class="  text-center text-5xl font-bold text-black dark:text-secondary">
 			Earn what you deserve
 		</p>
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 
-	<div class="  dark:bg-secondary-dark p-6 border-t-2 border-primary">
+	<div class="   p-6 border-t-2 border-primary">
 		<p class=" text-2xl font-semibold dark:text-secondary">Popular Gems</p>
 
 		{#each data.files as file}
