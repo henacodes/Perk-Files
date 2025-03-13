@@ -10,6 +10,7 @@ const LIGHT = 'light';
 type ThemeType = 'light' | 'dark';
 
 let theme: ThemeType = $state(LIGHT);
+const theOppositeTheme = (theme: ThemeType): ThemeType => (theme === 'dark' ? 'light' : 'dark');
 
 export function notify(title: string, message: string = '') {
 	alert = { title, message };
@@ -19,17 +20,27 @@ export function notify(title: string, message: string = '') {
 }
 
 export function switchTheme() {
-	let isAlreadyDark = document.documentElement.classList.contains('dark');
-	if (isAlreadyDark) {
-		theme = LIGHT;
+	console.log(theme);
+	updateHTMLClass(theOppositeTheme(theme));
+	localStorage.setItem('theme', theme);
+}
 
-		removeThemeFromClassList(DARK);
-		addThemeToClassList(LIGHT);
-	} else {
-		theme = 'dark';
-		removeThemeFromClassList(LIGHT);
-		addThemeToClassList(DARK);
+export function loadTheme() {
+	let currTheme = localStorage.getItem('theme') as ThemeType;
+	if (!currTheme) {
+		localStorage.setItem('theme', LIGHT);
+		currTheme = LIGHT;
 	}
+	updateHTMLClass(currTheme);
+
+	console.log(theme);
+}
+
+function updateHTMLClass(currTheme: ThemeType) {
+	//let isAlreadyDark = document.documentElement.classList.contains('dark');
+	theme = currTheme;
+	removeThemeFromClassList(theOppositeTheme(theme));
+	addThemeToClassList(theme);
 }
 
 function removeThemeFromClassList(theme: ThemeType) {

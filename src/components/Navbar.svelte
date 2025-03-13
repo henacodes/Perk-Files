@@ -7,10 +7,10 @@
 <div
 	class="  w-full p-3 border-b-2 border-black bg-secondary dark:bg-secondary-dark flex items-center justify-between"
 >
-	<p class=" text-primary px-2 text-3xl font-bold p-1 rounded bg-secondary">P.</p>
+	<p class=" text-primary px-2 text-3xl font-bold p-1 rounded">PerkFiles.</p>
 
 	<div class="flex gap-2 items-center">
-		<Avatar alt="Henok AYenew" />
 		<ThemeSwitch />
+		<Avatar alt="Henok AYenew" />
 	</div>
 </div>

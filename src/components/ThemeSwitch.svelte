@@ -5,11 +5,11 @@
 
 <button
 	onclick={() => switchTheme()}
-	class=" flex justify-center items-center rounded shadow-[2px_2px_#000000] hover:translate-[2px] hover:shadow-none transition ease-in-out cursor-pointer p-2 border-[2px] w-8 h-8"
+	class=" flex justify-center items-center rounded shadow-[2px_2px_#000000] hover:translate-[2px] hover:shadow-none transition ease-in-out cursor-pointer p-2 border-[2px] border-dark w-8 h-8"
 >
 	{#if getTheme() == 'light'}
-		<Sun />
+		<MoonStar class="text-secondary-dark" />
 	{:else}
-		<MoonStar />
+		<Sun class="text-secondary" />
 	{/if}
 </button>

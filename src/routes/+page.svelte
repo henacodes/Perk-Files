@@ -6,6 +6,7 @@
 	import { browser } from '$app/environment';
 	import Alert from '../components/Alert.svelte';
 	import { notify } from '../state/uiState.svelte';
+	import { goto } from '$app/navigation';
 
 	const { data } = $props();
 
@@ -18,14 +19,16 @@
 	});
 </script>
 
-<div class=" relative z-30 bg-primary/10">
-	<div class="bg-primary p-10 border-b-2 border-black">
-		<p class="  text-center text-5xl font-bold text-black">Earn what you deserve</p>
+<div class=" relative z-30 bg-primary/10 dark:bg-secondary-dark">
+	<div class="bg-primary dark:bg-secondary-dark p-10 border-b-2 border-black">
+		<p class="  text-center text-5xl font-bold text-black dark:text-secondary">
+			Earn what you deserve
+		</p>
 
 		<div class=" flex justify-center pb-10 pt-5">
 			<button
-				onclick={() => notify('Error occured', 'We got a problem here')}
-				class=" browse border-black text-black flex cursor-pointer items-center border-2 rounded-md p-2 px-7 transition ease-linear shadow-[3px_3px_#000000] hover:translate-[3px] hover:shadow-none"
+				onclick={() => goto('/feed')}
+				class=" browse border-black text-black bg-primary flex cursor-pointer items-center border-2 rounded-md p-2 px-7 transition ease-linear shadow-[3px_3px_#000000] hover:translate-[3px] hover:shadow-none"
 			>
 				<span class=" mx-2">Browse</span>
 				<ArrowRight size={20} />
@@ -33,8 +36,8 @@
 		</div>
 	</div>
 
-	<div class=" bg-primary/10 p-6 border-t-2 border-primary">
-		<p class=" text-2xl font-semibold">Popular Gems</p>
+	<div class="  dark:bg-secondary-dark p-6 border-t-2 border-primary">
+		<p class=" text-2xl font-semibold dark:text-secondary">Popular Gems</p>
 
 		{#each data.files as file}
 			<PostCard {file} />

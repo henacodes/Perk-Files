@@ -14,7 +14,7 @@
 	});
 </script>
 
-<div class=" bg-primary/10">
+<div class=" bg-primary/10 dark:bg-secondary-dark">
 	<div class=" w-full grid md:grid-cols-2 lg:grid-cols-3 gap-1">
 		{#each data.files as file}
 			<PostCard {file} />

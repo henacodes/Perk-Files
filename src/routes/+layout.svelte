@@ -4,6 +4,15 @@
 	import { getAlert } from '$state/uiState.svelte';
 	import Navbar from '$components/Navbar.svelte';
 	let { children } = $props();
+	import { loadTheme } from '$state/uiState.svelte';
+	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
+
+	onMount(() => {
+		if (browser) {
+			loadTheme();
+		}
+	});
 </script>
 
 <div class=" ">

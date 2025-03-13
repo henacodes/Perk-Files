@@ -31,10 +31,10 @@
 			</div>
 
 			<button
-				class="bg-secondary text-black border-[2px] border-dark my-3 flex w-full items-center justify-center py-1 shadow-[3px_3px_#000000] hover:translate-[3px] hover:shadow-none transition ease-in-out rounded-md"
+				class="bg-secondary dark:bg-secondary-dark text-black border-[2px] border-dark my-3 flex w-full items-center justify-center py-1 shadow-[3px_3px_#000000] hover:translate-[3px] hover:shadow-none transition ease-in-out rounded-md"
 			>
-				<span class="mx-2"> Cart </span>
-				<Plus size={20} />
+				<span class="mx-2 dark:text-secondary"> Cart </span>
+				<Plus size={20} class="dark:text-secondary" />
 			</button>
 		</div>
 	</div>
