@@ -21,7 +21,7 @@
 
 	<div class="flex flex-col mt-6 text-secondary-dark dark:text-secondary gap-3">
 		<p>Author: <span class="font-bold"> {file.author.name}</span></p>
-		<p>Price: <span class="font-bold"> ETB{file.price}</span></p>
+		<p>Price: <span class="font-bold"> ETB {file.price}</span></p>
 		<p>
 			Posted On: <span class="font-bold"> {new Date(file.createdAt).toLocaleDateString()}</span>
 		</p>

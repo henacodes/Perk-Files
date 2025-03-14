@@ -1,5 +1,5 @@
 import { auth } from '$lib/auth';
-import { fetchMyFiles } from '$lib/db/files';
+import { fetchPurchasedFiles } from '$lib/db/files';
 import { json, redirect, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ request }) => {
@@ -9,12 +9,12 @@ export const GET: RequestHandler = async ({ request }) => {
 
 	if (!session) {
 		console.log('no session');
-		return redirect(301, '/');
+		return redirect(307, '/');
 	}
 
 	console.log('sessssssion', session);
 
-	const files = await fetchMyFiles(session.user.id);
+	const files = await fetchPurchasedFiles(session.user.id);
 
 	return json(files[0]);
 };
