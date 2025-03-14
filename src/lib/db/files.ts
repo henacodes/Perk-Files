@@ -45,7 +45,11 @@ export const fetchMyFiles = async (userId: string) => {
 	const transactions = await prisma.transaction.findMany({
 		where: { userId, status: 'done' },
 		include: {
-			digitalFiles: true
+			digitalFiles: {
+				include: {
+					author: true
+				}
+			}
 		}
 	});
 

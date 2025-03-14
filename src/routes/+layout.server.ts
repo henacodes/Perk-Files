@@ -1,4 +1,6 @@
 import { auth } from '$lib/auth';
+import { protectedRoutes } from '$lib/constants';
+import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ request }) => {
@@ -7,7 +9,12 @@ export const load: LayoutServerLoad = async ({ request }) => {
 	});
 
 	let user: any = session?.user;
-	console.log('userrrrrrrrrrrrrrrrrr', user);
+
+	let urlPath = new URL(request.url).pathname;
+
+	if (!user && protectedRoutes.includes(urlPath)) {
+		redirect(307, '/login');
+	}
 
 	return {
 		user

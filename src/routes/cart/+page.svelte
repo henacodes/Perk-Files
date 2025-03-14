@@ -3,8 +3,9 @@
 	import { onMount } from 'svelte';
 
 	import FileView from '../../components/FileView.svelte';
-	import { Barcode } from 'lucide-svelte';
+	import { Barcode, LoaderCircle } from 'lucide-svelte';
 	import { generateRandomString } from 'better-auth/crypto';
+	import { notify } from '$state/uiState.svelte';
 
 	let { data } = $props();
 
@@ -49,8 +50,9 @@
 				body: JSON.stringify(payload)
 			});
 			let result = await res.json();
-			if (result) {
-				window.location = result.checkoutUrl;
+			console.log(result);
+			if (result.error) {
+				notify('Checkout Failed', result.error.message, 'error');
 			}
 		} catch (error) {
 			console.log(error);
@@ -58,9 +60,9 @@
 	}
 </script>
 
-<div class=" p-4 bg-secondary dark:bg-secondary-dark h-[90vh]">
+<div class=" p-4 h-[93.7vh] bg-primary/10">
 	{#each cart as file}
-		<FileView />
+		<FileView {file} />
 	{/each}
 
 	<p class=" my-2 dark:text-secondary">
@@ -69,7 +71,7 @@
 
 	<button
 		onclick={checkout}
-		class=" w-full bg-primary flex items-center justify-center p-2 rounded-sm transition ease-in-out text-black shadow-[3px_3px_#000000] hover:translate-[3px] hover:shadow-none border-[2px] border-black"
+		class=" w-full bg-primary flex items-center justify-center p-2 rounded-sm transition ease-in-out text-black shadow-[3px_3px_#000000] hover:translate-[3px] hover:shadow-none border-[3px] border-black"
 	>
 		<Barcode /> <span class="mx-2">Checkout</span></button
 	>

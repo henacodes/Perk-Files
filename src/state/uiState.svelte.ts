@@ -1,6 +1,7 @@
 interface Alert {
 	title: string;
 	message: string;
+	type: ErrorTypes;
 }
 
 let alert: Alert | null = $state(null);
@@ -12,8 +13,9 @@ type ThemeType = 'light' | 'dark';
 let theme: ThemeType = $state(LIGHT);
 const theOppositeTheme = (theme: ThemeType): ThemeType => (theme === 'dark' ? 'light' : 'dark');
 
-export function notify(title: string, message: string = '') {
-	alert = { title, message };
+type ErrorTypes = 'success' | 'error';
+export function notify(title: string, message: string = '', errorType: ErrorTypes = 'success') {
+	alert = { title, message, type: errorType };
 	setTimeout(() => {
 		alert = null;
 	}, 3000);

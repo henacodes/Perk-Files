@@ -4,8 +4,7 @@
 	import PostCard from '../components/PostCard.svelte';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-	import Alert from '../components/Alert.svelte';
-	import { notify } from '../state/uiState.svelte';
+
 	import { goto } from '$app/navigation';
 
 	const { data } = $props();
@@ -20,7 +19,7 @@
 </script>
 
 <div class=" relative z-30 bg-primary/10">
-	<div class=" p-10 border-b-2 border-black">
+	<div class=" p-10 bg-primary/50">
 		<p class="  text-center text-5xl font-bold text-black dark:text-secondary">
 			Earn what you deserve
 		</p>

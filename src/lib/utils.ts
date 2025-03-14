@@ -3,7 +3,9 @@ export function trimParag(paragraph: string, length: number) {
 }
 
 export function returnError(message: string, otherFields?: Object) {
-	return { message, ...otherFields };
+	return {
+		error: { message, ...otherFields }
+	};
 }
 
 export function serializeFile(file: any) {

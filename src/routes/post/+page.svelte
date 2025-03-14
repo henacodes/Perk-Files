@@ -27,20 +27,18 @@
 		// Validate form data using Zod schema
 		try {
 			fileSchema.parse({ title, description, price, file, categoryId });
-			errors = {}; // Clear any previous errors
+			errors = {};
 
-			// Prepare form data to be sent to the API
 			const formData = new FormData();
 			formData.append('title', title);
 			formData.append('description', description);
-			formData.append('price', price!.toString()); // Ensure it's a string
+			formData.append('price', price!.toString());
 			formData.append('categoryId', categoryId);
 			if (file) formData.append('file', file);
 
-			// Send form data to your API endpoint (backend)
 			const response = await fetch('/api/supabase', {
 				method: 'POST',
-				body: formData // Send FormData (including file)
+				body: formData
 			});
 
 			const result = await response.json();

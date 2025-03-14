@@ -8,8 +8,11 @@ export const GET: RequestHandler = async ({ request }) => {
 	});
 
 	if (!session) {
+		console.log('no session');
 		return redirect(301, '/');
 	}
+
+	console.log('sessssssion', session);
 
 	const files = await fetchMyFiles(session.user.id);
 

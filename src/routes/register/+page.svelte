@@ -1,5 +1,12 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	import { authClient } from '$lib/auth-client';
+	import { notify } from '$state/uiState.svelte';
+	import { redirect } from '@sveltejs/kit';
+	import { onMount } from 'svelte';
+
+	let { data } = $props();
 	const formData = {
 		email: 'test@gmail.com',
 		password: '12345678',
@@ -17,10 +24,23 @@
 		});
 
 		console.log(data, error);
+
+		if (error) {
+			notify('Sign-Up failed', error.message, 'error');
+		}
 	};
+
+	onMount(() => {
+		if (browser) {
+			if (data.user) {
+				//window.location = '/feed';
+				goto('/feed');
+			}
+		}
+	});
 </script>
 
-<div class="  p-6 w-full flex flex-col items-center">
+<div class="  p-6 w-full flex flex-col items-center h-[90vh]">
 	<p class="text-2xl font-bold text-center">Sign Up</p>
 	<form
 		action=""
@@ -28,13 +48,13 @@
 	>
 		<input
 			type="email"
-			class=" w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class=" w-full border border-black rounded-md bg-secondary/50 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 			placeholder="Email"
 			bind:value={formData.email}
 		/>
 		<input
 			type="password"
-			class=" w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class=" w-full border border-black rounded-md bg-secondary/50 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 			placeholder="password"
 			bind:value={formData.password}
 		/>
@@ -42,13 +62,13 @@
 		<div class="flex gap-2">
 			<input
 				type="text"
-				class=" w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+				class=" w-full border border-black rounded-md bg-secondary/50 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 				placeholder="First Name"
 				bind:value={formData.firstName}
 			/>
 			<input
 				type="text"
-				class=" w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+				class=" w-full border border-black rounded-md bg-secondary/50 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 				placeholder="Last Name ( optional )"
 				bind:value={formData.lastName}
 			/>
@@ -59,7 +79,7 @@
 				type="file"
 				name="profile"
 				placeholder="Profile Pic"
-				class="border border-black rounded-md hover:bg-secondary transition ease-in-out focus-visible:shadow-[1px_1px_#000000] my-3 py-3 px-1 focus-visible:outline-none cursor-pointer mb-6"
+				class="border border-black rounded-md hover:bg-secondary/50 transition ease-in-out focus-visible:shadow-[1px_1px_#000000] my-3 py-3 px-1 focus-visible:outline-none cursor-pointer mb-6"
 				id=""
 				bind:files={formData.image}
 			/>
@@ -68,15 +88,15 @@
 		<div class=" flex justify-center">
 			<button
 				onclick={register}
-				class=" border rounded-md border-black p-2 bg-secondary shadow-[2px_2px_#000000] transition ease-in-out hover:shadow-none scale-105 hover:scale-100 w-2/3"
+				class=" border rounded-md border-black p-2 bg-secondary shadow-[3px_3px_#000000] transition ease-in-out hover:shadow-none hover:translate-3px w-2/3"
 				>Register
 			</button>
 		</div>
 	</form>
-	<p class="mt-4">
+	<p class="mt-4 text-secondary">
 		Already have an account? <a
 			href="/login"
-			class="   bg-primary transition ease-in-out p-1 rounded px-2 shadow-[2px_2px_#000000] border border-black scale-105 hover:scale-100 hover:shadow-none"
+			class="   bg-primary transition ease-in-out p-1 rounded px-2 shadow-[2px_2px_#000000] border border-black scale-105 hover:scale-100 hover:shadow-none text-secondary-dark"
 			>Sign In</a
 		>
 	</p>
