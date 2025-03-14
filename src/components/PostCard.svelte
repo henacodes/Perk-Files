@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { trimParag } from '$lib/utils';
+	import { convertBytes } from '$lib/utils/file';
 	import { Plus, FileType, HardDrive } from 'lucide-svelte';
 
 	let { file } = $props();
@@ -26,7 +27,8 @@
 					<FileType class="text-slate-600  mx-2 " /> PNG
 				</p>
 				<p class=" text-slate-600 my-2 flex items-center">
-					<HardDrive class="text-slate-600 mx-2 " /> 42.6 MB
+					<HardDrive class="text-slate-600 mx-2 " />
+					{convertBytes(file.fileSize)}
 				</p>
 			</div>
 

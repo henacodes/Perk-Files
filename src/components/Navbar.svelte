@@ -4,19 +4,26 @@
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import { LogIn, LogOut } from 'lucide-svelte';
 	import { authClient } from '$lib/auth-client';
+	import NavDropDownMenu from './NavDropDownMenu.svelte';
+
 	const { user } = $props();
+
+	let dropdownMenuOpen = $state(false);
 </script>
 
 <div class=" z-50 fixed top-0 left-0 w-full flex bg-red-500">
 	<div
 		class="    bg-secondary dark:bg-secondary-dark flex items-center justify-between h-[10vh] w-full px-5 border-b-2 border-black transition ease-in-out"
 	>
-		<p class=" text-primary text-3xl font-bold rounded">PerkFiles.</p>
+		<p class=" text-primary text-3xl font-bold rounded" onclick={() => {}}>PerkFiles.</p>
 
-		<div class="flex gap-2 items-center">
+		<div class="flex gap-2 items-center relative">
 			<ThemeSwitch />
 			{#if user}
-				<Avatar image={user.image} alt={user.name} />
+				<Avatar image={user.image} alt={user.name} onclick={() => (dropdownMenuOpen = true)} />
+				{#if dropdownMenuOpen}
+					<NavDropDownMenu onclick={() => (dropdownMenuOpen = false)} />
+				{/if}
 				<button
 					onclick={async () => {
 						try {

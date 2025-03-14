@@ -9,6 +9,9 @@
 	--color-secondary: #f3f3f3;
 	--color-secondary-dark: #272933;
 }
+* {
+	box-sizing: border-box;
+}
 
 button {
 	cursor: pointer;

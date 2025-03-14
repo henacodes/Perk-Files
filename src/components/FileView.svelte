@@ -2,6 +2,8 @@
 	import { File } from 'lucide-svelte';
 
 	import axios from 'axios';
+	import { convertToDB } from 'better-auth/db';
+	import { convertBytes } from '$lib/utils/file';
 
 	const { file, download } = $props();
 
@@ -42,13 +44,13 @@
 <div
 	class="border-dark border-2 p-3 shadow-[4px_4px_#000000] rounded-md my-2 bg-secondary dark:bg-secondary-dark transition ease-in-out"
 >
-	<div class=" flex items-center">
-		<div class=" flex flex-[0.1] flex-col items-center justify-center dark:text-secondary">
+	<div class=" flex items-center justify-center">
+		<div class=" flex flex-[0.2] flex-col items-center justify-center dark:text-secondary">
 			<File />
-			<small>{23.3}MB</small>
+			<small>{convertBytes(file.fileSize)}</small>
 		</div>
-		<p class=" mx-3 flex-[0.9] text-xl font-bold text-primary">
-			{file.title}
+		<p class=" mx-3 flex-[0.8] text-xl font-bold text-primary">
+			A{file.title}
 		</p>
 	</div>
 

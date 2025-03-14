@@ -64,10 +64,7 @@
 	};
 </script>
 
-<form
-	on:submit={handleSubmit}
-	class="space-y-4 p-6 bg-gradient-to-tl from-primary/40 to-primary/10 h-[100vh] overflow-auto"
->
+<form on:submit={handleSubmit} class="space-y-4 p-6 h-[100vh] overflow-auto">
 	<p class="text-3xl font-bold text-secondary-dark dark:text-secondary">Post a new file</p>
 	<div>
 		<label for="file" class="block text-sm font-medium text-gray-700 dark:text-slate-300"
@@ -78,10 +75,12 @@
 			type="file"
 			accept="image/jpeg, image/png"
 			on:change={handleFileChange}
-			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none cursor-pointer"
+			class="w-full border border-black rounded-md bg-primary/10 text-slate-600 dark:text-slate-200 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none cursor-pointer"
 		/>
 		{#if errors.file}
-			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">{errors.file}</p>
+			<p class="border border-red-600 bg-red-600/10 text-slate-400 rounded p-2 text-sm mt-1">
+				{errors.file}
+			</p>
 		{/if}
 	</div>
 
@@ -93,10 +92,12 @@
 			id="title"
 			type="text"
 			bind:value={title}
-			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-primary/10 text-slate-600 dark:text-slate-200 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 		/>
 		{#if errors.title}
-			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">{errors.title}</p>
+			<p class="border border-red-600 bg-red-600/10 text-slate-400 rounded p-2 text-sm mt-1">
+				{errors.title}
+			</p>
 		{/if}
 	</div>
 
@@ -107,10 +108,10 @@
 		<textarea
 			id="description"
 			bind:value={description}
-			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-primary/10 text-slate-600 dark:text-slate-200 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 		></textarea>
 		{#if errors.description}
-			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">
+			<p class="border border-red-600 bg-red-600/10 text-slate-400 rounded p-2 text-sm mt-1">
 				{errors.description}
 			</p>
 		{/if}
@@ -124,10 +125,12 @@
 			id="price"
 			type="number"
 			bind:value={price}
-			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-primary/10 text-slate-600 dark:text-slate-200 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 		/>
 		{#if errors.price}
-			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">{errors.price}</p>
+			<p class="border border-red-600 bg-red-600/10 text-slate-400 rounded p-2 text-sm mt-1">
+				{errors.price}
+			</p>
 		{/if}
 	</div>
 
@@ -146,7 +149,7 @@
 		</select>
 
 		{#if errors.categoryId}
-			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">
+			<p class="border border-red-600 bg-red-600/10 text-slate-400 rounded p-2 text-sm mt-1">
 				{errors.categoryId}
 			</p>
 		{/if}
