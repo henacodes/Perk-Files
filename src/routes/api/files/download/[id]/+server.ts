@@ -34,9 +34,11 @@ export const GET: RequestHandler = async ({ request, params }) => {
 		try {
 			const blob = await downloadFile(file.fileUrl, 'perks');
 			const buffer = await blob.arrayBuffer();
+			const contentLength = buffer.byteLength;
 			const headers = {
-				'Content-Disposition': `attachment; filename="${file.fileUrl}"`, // Filename for the download
-				'Content-Type': blob.type // MIME type of the Blob
+				'Content-Disposition': `attachment; filename="${file.fileUrl}"`,
+				'Content-Type': blob.type,
+				'Content-Length': contentLength.toString()
 			};
 
 			return new Response(buffer, {

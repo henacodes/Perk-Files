@@ -64,15 +64,21 @@
 	};
 </script>
 
-<form on:submit={handleSubmit} class="space-y-4 p-6 bg-primary/20 h-[100vh] overflow-auto">
+<form
+	on:submit={handleSubmit}
+	class="space-y-4 p-6 bg-gradient-to-tl from-primary/40 to-primary/10 h-[100vh] overflow-auto"
+>
+	<p class="text-3xl font-bold text-secondary-dark dark:text-secondary">Post a new file</p>
 	<div>
-		<label for="file" class="block text-sm font-medium text-gray-700">Choose a file</label>
+		<label for="file" class="block text-sm font-medium text-gray-700 dark:text-slate-300"
+			>Choose a file</label
+		>
 		<input
 			id="file"
 			type="file"
 			accept="image/jpeg, image/png"
 			on:change={handleFileChange}
-			class="w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none cursor-pointer"
+			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none cursor-pointer"
 		/>
 		{#if errors.file}
 			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">{errors.file}</p>
@@ -80,12 +86,14 @@
 	</div>
 
 	<div>
-		<label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+		<label for="title" class="block text-sm font-medium text-gray-700 dark:text-slate-300"
+			>Title</label
+		>
 		<input
 			id="title"
 			type="text"
 			bind:value={title}
-			class="w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 		/>
 		{#if errors.title}
 			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">{errors.title}</p>
@@ -93,11 +101,13 @@
 	</div>
 
 	<div>
-		<label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+		<label for="description" class="block text-sm font-medium text-gray-700 dark:text-slate-300"
+			>Description</label
+		>
 		<textarea
 			id="description"
 			bind:value={description}
-			class="w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 		></textarea>
 		{#if errors.description}
 			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">
@@ -107,12 +117,14 @@
 	</div>
 
 	<div>
-		<label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+		<label for="price" class="block text-sm font-medium text-gray-700 dark:text-slate-300"
+			>Price</label
+		>
 		<input
 			id="price"
 			type="number"
 			bind:value={price}
-			class="w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-primary/30 focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 		/>
 		{#if errors.price}
 			<p class="border border-red-600 bg-red-600/10 rounded p-2 text-sm mt-1">{errors.price}</p>
@@ -120,11 +132,13 @@
 	</div>
 
 	<div>
-		<label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+		<label for="category" class="block text-sm font-medium text-gray-700 dark:text-slate-300"
+			>Category</label
+		>
 		<select
 			id="category"
 			bind:value={categoryId}
-			class="w-full border border-black rounded-md bg-secondary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
+			class="w-full border border-black rounded-md bg-primary focus-visible:shadow-[1px_1px_#000000] my-3 p-3 focus-visible:outline-none"
 		>
 			<option value="">Select a Category</option>
 			<option value="category-id-1">Category 1</option>
@@ -140,7 +154,7 @@
 
 	<button
 		type="submit"
-		class="hover:shadow-[4px_4px_#5e503f] border-primary cursor-pointer items-center border p-2 px-7 transition ease-linear w-full flex justify-center mt-5"
+		class="hover:shadow-none hover:translate-[3px] border-black cursor-pointer items-center border p-2 px-7 transition ease-linear w-full flex justify-center mt-5 bg-primary shadow-[3px_3px_#000] rounded"
 		>Upload</button
 	>
 </form>

@@ -1,13 +1,46 @@
 <script lang="ts">
 	import { File } from 'lucide-svelte';
 
+	import axios from 'axios';
+
 	const { file, download } = $props();
 
-	console.log(file);
+	let isDownloading = $state(false);
+
+	let downloadedPercent = $state(0);
+
+	const downloadFile = async (fileId: string) => {
+		isDownloading = true;
+		const response = await axios.get(`/api/files/download/${fileId}`, {
+			responseType: 'blob', // Make sure to specify that we're expecting a Blob
+			onDownloadProgress: (progressEvent) => {
+				if (progressEvent.total) {
+					const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+					downloadedPercent = progress;
+				}
+			}
+		});
+
+		const blob = response.data;
+		const url = window.URL.createObjectURL(blob);
+		const link = document.createElement('a');
+		link.href = url;
+		link.setAttribute('download', file.title); // or use the file name from the response if available
+		document.body.appendChild(link);
+		link.click();
+
+		// Clean up after the download is triggered
+		setTimeout(() => {
+			document.body.removeChild(link);
+			isDownloading = false;
+			downloadedPercent = 0;
+			window.URL.revokeObjectURL(url);
+		}, 0);
+	};
 </script>
 
 <div
-	class="border-dark border-2 p-3 shadow-[4px_4px_#000000] rounded-md my-2 bg-secondary dark:bg-secondary-dark"
+	class="border-dark border-2 p-3 shadow-[4px_4px_#000000] rounded-md my-2 bg-secondary dark:bg-secondary-dark transition ease-in-out"
 >
 	<div class=" flex items-center">
 		<div class=" flex flex-[0.1] flex-col items-center justify-center dark:text-secondary">
@@ -28,9 +61,15 @@
 
 		{#if download}
 			<button
-				class=" bg-primary rounded mt-5 p-3 shadow-[4px_4px_#000] border-[2px] border-black hover:translate-[4px] hover:shadow-none transition ease-in-out"
+				disabled={isDownloading}
+				onclick={() => downloadFile(file.id)}
+				class="   bg-primary rounded mt-5 p-3 shadow-[4px_4px_#000] border-[2px] border-black hover:translate-[4px] hover:shadow-none transition ease-in-out disabled:grayscale-100"
 				>Download</button
 			>
+		{/if}
+
+		{#if isDownloading}
+			<p>Downloading: <span class=" font-bold">{downloadedPercent}%</span></p>
 		{/if}
 	</div>
 </div>

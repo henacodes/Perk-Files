@@ -9,7 +9,7 @@
 
 <div class=" z-50 fixed top-0 left-0 w-full flex bg-red-500">
 	<div
-		class="    bg-secondary dark:bg-secondary-dark flex items-center justify-between h-[10vh] w-full px-5 border-b-2 border-black"
+		class="    bg-secondary dark:bg-secondary-dark flex items-center justify-between h-[10vh] w-full px-5 border-b-2 border-black transition ease-in-out"
 	>
 		<p class=" text-primary text-3xl font-bold rounded">PerkFiles.</p>
 
