@@ -6,12 +6,15 @@
 	import { Barcode, LoaderCircle } from 'lucide-svelte';
 	import { generateRandomString } from 'better-auth/crypto';
 	import { notify } from '$state/uiState.svelte';
+	import { PUBLIC_BASE_URL } from '$env/static/public';
 
 	let { data } = $props();
 
 	let user: any = data.user;
 
 	let cart: any[] = $state([]);
+
+	let transactionLoading = $state(false);
 
 	onMount(() => {
 		if (browser) {
@@ -38,11 +41,11 @@
 			tx_ref: txRef,
 			last_name: name[1],
 			callback_url: 'http://localhost:5173/api/chapa/callback',
-			return_url: `http://localhost:5173/verify?tx_ref=${txRef}`,
+			return_url: `${PUBLIC_BASE_URL}/verify?tx_ref=${txRef}`,
 			digital_files: cart.map((f) => f.id)
 		};
 
-		console.log(payload);
+		transactionLoading = true;
 
 		try {
 			const res = await fetch('/api/transactions', {
@@ -50,15 +53,32 @@
 				body: JSON.stringify(payload)
 			});
 			let result = await res.json();
-			console.log(result);
+
 			if (result.error) {
 				notify('Checkout Failed', result.error.message, 'error');
+				transactionLoading = false;
+			} else {
+				transactionLoading = false;
+				notify(
+					'Transaction Pending',
+					'You will be redirected to chapa checkout page to finish the transaction',
+					'success'
+				);
+				window.location = result.checkoutUrl;
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	}
 </script>
+
+{#if transactionLoading}
+	<div
+		class=" w-full h-[100vh] bg-black/50 top-0 left-0 fixed z-50 flex justify-center items-center"
+	>
+		<LoaderCircle class=" animate-spin text-primary  " size={50} />
+	</div>
+{/if}
 
 <div class=" p-4 h-[93.7vh] bg-primary/10">
 	{#each cart as file}

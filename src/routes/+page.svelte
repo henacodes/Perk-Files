@@ -8,14 +8,6 @@
 	import { goto } from '$app/navigation';
 
 	const { data } = $props();
-
-	onMount(() => {
-		if (browser) {
-			if (data.files) {
-				localStorage.setItem('file-cart', JSON.stringify(data.files));
-			}
-		}
-	});
 </script>
 
 <div class=" relative z-30 bg-primary/10">
@@ -38,8 +30,10 @@
 	<div class="   p-6 border-t-2 border-primary">
 		<p class=" text-2xl font-semibold dark:text-secondary">Popular Gems</p>
 
-		{#each data.files as file}
-			<PostCard {file} />
-		{/each}
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+			{#each data.files as file}
+				<PostCard {file} />
+			{/each}
+		</div>
 	</div>
 </div>

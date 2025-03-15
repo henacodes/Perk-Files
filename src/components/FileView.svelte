@@ -2,10 +2,9 @@
 	import { File } from 'lucide-svelte';
 
 	import axios from 'axios';
-	import { convertToDB } from 'better-auth/db';
 	import { convertBytes } from '$lib/utils/file';
 
-	const { file, download } = $props();
+	const { file, download = false } = $props();
 
 	let isDownloading = $state(false);
 
@@ -17,7 +16,17 @@
 			responseType: 'blob', // Make sure to specify that we're expecting a Blob
 			onDownloadProgress: (progressEvent) => {
 				if (progressEvent.total) {
-					const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+					const progress = (progressEvent.loaded / progressEvent.total) * 100;
+					console.log(progress);
+					// Log raw progress to see any intermediate steps
+					console.log(
+						'Loaded:',
+						progressEvent.loaded,
+						'Total:',
+						progressEvent.total,
+						'Progress:',
+						progress
+					);
 					downloadedPercent = progress;
 				}
 			}
@@ -50,7 +59,7 @@
 			<small>{convertBytes(file.fileSize)}</small>
 		</div>
 		<p class=" mx-3 flex-[0.8] text-xl font-bold text-primary">
-			A{file.title}
+			{file.title}
 		</p>
 	</div>
 

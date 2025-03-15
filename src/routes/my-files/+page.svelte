@@ -7,10 +7,18 @@
 <div class=" w-full px-9 pt-4 min-h-[90vh]">
 	<p class="text-secondary-dark dark:text-secondary font-semibold text-2xl">Purchased Files</p>
 
-	<div class=" flex flex-col gap-5 p-3 rounded mt-5">
+	<div class=" flex flex-col gap-5 rounded mt-5">
 		{#each data.purchasedFiles as file}
 			<FileView {file} download={true} />
 		{/each}
+
+		{#if !data.purchasedFiles.length}
+			<p
+				class=" p-2 bg-primary/10 dark:text-secondary text-secondary-dark rounded border border-primary"
+			>
+				You didn't purchase any file so far
+			</p>
+		{/if}
 	</div>
 
 	<p class="text-secondary-dark dark:text-secondary font-semibold text-2xl mt-5">Your own files</p>
@@ -19,5 +27,12 @@
 		{#each data.postedFiles as file}
 			<FileView {file} download={true} />
 		{/each}
+		{#if !data.postedFiles.length}
+			<p
+				class=" p-2 bg-primary/10 dark:text-secondary text-secondary-dark rounded border border-primary"
+			>
+				You don't have posted files
+			</p>
+		{/if}
 	</div>
 </div>

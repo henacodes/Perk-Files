@@ -29,8 +29,10 @@ model User {
 
   digitalFiles DigitalFile[]
   transactions Transaction[]
+  cart Cart[]
 
   @@map("user")
+ 
 }
 
 model Session {
@@ -107,9 +109,20 @@ model DigitalFile {
   authorId    String 
   fileSize    Int? 
   category    String 
-  transactions Transaction[] @relation("TransactionDigitalFiles") 
+  transactions Transaction[] @relation("TransactionDigitalFiles")
+  carts Cart[] @relation("CartDigitalFiles")
+ 
 
   @@map("digital_file") 
 }
 
 
+
+
+model Cart {
+  id          String        @id @default(uuid()) 
+  files DigitalFile[] @relation("CartDigitalFiles")
+  user        User         @relation(fields: [userId], references: [id]) 
+  userId      String  @unique()
+
+}

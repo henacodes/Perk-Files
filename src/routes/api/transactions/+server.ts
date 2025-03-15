@@ -3,6 +3,7 @@ import { deleteTransaction, startTransaction } from '$lib/db/transaction';
 import { json, redirect, type RequestHandler } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { returnError } from '$lib/utils';
+import { clearCart } from '$lib/db/cart';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const apiUrl = env.CHAPA_INIT_URL;
@@ -37,6 +38,10 @@ export const POST: RequestHandler = async ({ request }) => {
 				},
 				body: JSON.stringify(body)
 			});
+
+			// clear the cart
+
+			await clearCart();
 
 			let res = await response.json();
 			return json({ checkoutUrl: res.data.checkout_url });

@@ -1,6 +1,4 @@
 import { prisma } from '$lib/server/prisma';
-import { supabase } from '$lib/server/supabase';
-import { type FileData } from '$lib/validations/fileSchema';
 
 export const createFile = async (
 	title: string,
@@ -40,6 +38,44 @@ export const fetchFiles = async () => {
 	return files;
 };
 
+// the reason we need this function is that we want to
+// exclude the files already in the cart or in transaction from being listed in the feed
+export const fetchFilesForLoggedInUser = async (userId: string) => {
+	const userCart = await prisma.cart.findFirst({
+		where: { userId: userId },
+		select: { files: true }
+	});
+	const cartFileIds = userCart?.files.map((item) => item.id) || [];
+
+	const transactionFileIds = await prisma.transaction
+		.findMany({
+			where: {
+				userId
+			},
+			select: { digitalFiles: { select: { id: true } } }
+		})
+		.then((transactions) =>
+			transactions.flatMap((transaction) => transaction.digitalFiles.map((file) => file.id))
+		);
+
+	const excludedFileIds = [...new Set([...cartFileIds, ...transactionFileIds])]; // Merge & remove duplicates
+
+	const files = await prisma.digitalFile.findMany({
+		where: {
+			id: { notIn: excludedFileIds }
+		},
+		include: {
+			author: {
+				select: {
+					name: true,
+					image: true
+				}
+			}
+		}
+	});
+	return files;
+};
+
 export const fetchPurchasedFiles = async (userId: string) => {
 	const transactions = await prisma.transaction.findMany({
 		where: { userId, status: 'done' },
@@ -52,7 +88,12 @@ export const fetchPurchasedFiles = async (userId: string) => {
 		}
 	});
 
-	return transactions.map((tx) => tx.digitalFiles);
+	let files: any[] = [];
+
+	transactions.forEach((tx) => {
+		files = [...files, ...tx.digitalFiles];
+	});
+	return files;
 };
 
 export const fetchPostedFiles = async (userId: string) => {

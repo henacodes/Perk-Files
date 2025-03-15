@@ -11,10 +11,7 @@ export const GET: RequestHandler = async ({ request }) => {
 		console.log('no session');
 		return redirect(307, '/');
 	}
-
-	console.log('sessssssion', session);
-
 	const files = await fetchPurchasedFiles(session.user.id);
-
-	return json(files[0]);
+	console.log(files);
+	return json(files);
 };
